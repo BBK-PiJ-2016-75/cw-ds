@@ -1,10 +1,8 @@
 public class ArrayList implements List {
   private Object[] array;
-  final static int DEFAULT_SIZE = 10;
   
-  //Constructor for array list of default size.
   public ArrayList() {
-    array = new Object[DEFAULT_SIZE];
+    array = new Object[0];
   }
   
   @Override
@@ -23,25 +21,33 @@ public class ArrayList implements List {
   
   @Override
   public ReturnObject get(int index) {
-    ReturnObjectImpl indexToCheck = checkIndex(index);
-    return indexToCheck;
+    if (isEmpty()) {
+      return new ReturnObjectImpl(ErrorMessage.EMPTY_STRUCTURE);
+    } else {
+      ReturnObjectImpl indexToCheck = checkIndex(index);
+      return indexToCheck;
+    }
   }
   
   @Override
   public ReturnObject remove(int index) {
-    ReturnObjectImpl indexToCheck = checkIndex(index);
-    if (!indexToCheck.hasError()) {
-      Object[] transfer = new Object[array.length - 1];
-      for (int i = 0; i <= transfer.length; i++) {
-        if (i < index) {
-          transfer[i] = array[i];
-        } else if (i > index) {
-          transfer[i - 1] = array[i];
+    if (isEmpty()) {
+      return new ReturnObjectImpl(ErrorMessage.EMPTY_STRUCTURE);
+    } else {
+      ReturnObjectImpl indexToCheck = checkIndex(index);
+      if (!indexToCheck.hasError()) {
+        Object[] transfer = new Object[array.length - 1];
+        for (int i = 0; i <= transfer.length; i++) {
+          if (i < index) {
+            transfer[i] = array[i];
+          } else if (i > index) {
+            transfer[i - 1] = array[i];
+          }
         }
+        array = transfer;
       }
-      array = transfer;
+      return indexToCheck;
     }
-    return indexToCheck;
   }
   
   @Override
@@ -86,9 +92,7 @@ public class ArrayList implements List {
   }
   
   private ReturnObjectImpl checkIndex (int indexCheck) {
-    if (isEmpty()) {
-      return new ReturnObjectImpl(ErrorMessage.EMPTY_STRUCTURE);
-    } else if (indexCheck < 0 || indexCheck >= array.length) {
+    if (indexCheck < 0 || indexCheck >= array.length) {
       return new ReturnObjectImpl(ErrorMessage.INDEX_OUT_OF_BOUNDS);
     } else {
       return new ReturnObjectImpl(array[indexCheck]);
