@@ -1,4 +1,10 @@
-Please see the general comments, some of which are applicable to your submission.
 The output of the various checking tools should be paid attention to although checkstyle is a little "aggressive".
 
-...
+Please refer to the general comments, re:
+
+* javadoc and comments
+* packages going forward
+* unit testing going forward
+* returning true/false
+* Internal classes (e.g., Node) that should be "package" access or "private"
+* 
