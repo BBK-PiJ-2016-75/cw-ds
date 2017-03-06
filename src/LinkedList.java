@@ -1,7 +1,7 @@
 public class LinkedList implements List {
   private int listSize = 0;
   private Node head = null;
-  
+
   @Override
   public boolean isEmpty() {
     if (head == null) {
@@ -10,12 +10,12 @@ public class LinkedList implements List {
       return false;
     }
   }
-  
+
   @Override
   public int size() {
     return listSize;
   }
-  
+
   @Override
   public ReturnObject get(int index) {
     if (isEmpty()) {
@@ -30,7 +30,7 @@ public class LinkedList implements List {
       }
     }
   }
-  
+
   @Override
   public ReturnObject remove(int index) {
     if (isEmpty()) {
@@ -71,12 +71,12 @@ public class LinkedList implements List {
       }
     }
   }
-  
+
   @Override
   public ReturnObject add(int index, Object item) {
     ReturnObjectImpl checkCurrentNode = checkIndex(index);
     if (checkCurrentNode != null) {
-        return checkCurrentNode;
+      return checkCurrentNode;
     } else {
       ReturnObjectImpl checkItem = checkNull(item);
       if (!checkItem.hasError()) {
@@ -84,7 +84,7 @@ public class LinkedList implements List {
         for (int i = 1; i < index; i++) {
           currentNode = currentNode.getNext();
         }
-        Node newNode = new Node (item);
+        Node newNode = new Node(item);
         boolean hasPrevious = false;
         boolean hasNext = false;
         Node previousNode = null;
@@ -119,7 +119,7 @@ public class LinkedList implements List {
       }
     }
   }
-  
+
   @Override
   public ReturnObject add(Object item) {
     ReturnObjectImpl checkItem = checkNull(item);
@@ -128,7 +128,7 @@ public class LinkedList implements List {
       for (int i = 1; i < listSize; i++) {
         currentNode = currentNode.getNext();
       }
-      Node newNode = new Node (item);
+      Node newNode = new Node(item);
       Node previousNode = null;
       previousNode.setNext(newNode);
       newNode.setPrevious(previousNode);
@@ -139,7 +139,7 @@ public class LinkedList implements List {
       return checkItem;
     }
   }
-  
+
   //Check index is within range.
   private ReturnObjectImpl checkIndex(int index) {
     if (index < 1 || index > listSize) {
@@ -148,7 +148,7 @@ public class LinkedList implements List {
       return null;
     }
   }
-  
+
   //Traverse list to requested index position.
   private ReturnObjectImpl traverseList(int index) {
     Node currentNode = head;
@@ -157,7 +157,7 @@ public class LinkedList implements List {
     }
     return new ReturnObjectImpl(currentNode.getValue());
   }
-  
+
   //Check that input is not a null object.
   private ReturnObjectImpl checkNull(Object item) {
     if (item == null) {

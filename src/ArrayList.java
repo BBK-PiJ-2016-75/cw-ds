@@ -1,10 +1,10 @@
 public class ArrayList implements List {
   private Object[] array;
-  
+
   public ArrayList() {
     array = new Object[0];
   }
-  
+
   @Override
   public boolean isEmpty() {
     if (array.length == 0) {
@@ -13,12 +13,12 @@ public class ArrayList implements List {
       return false;
     }
   }
-  
+
   @Override
   public int size() {
     return array.length;
   }
-  
+
   @Override
   public ReturnObject get(int index) {
     if (isEmpty()) {
@@ -28,7 +28,7 @@ public class ArrayList implements List {
       return indexToCheck;
     }
   }
-  
+
   @Override
   public ReturnObject remove(int index) {
     if (isEmpty()) {
@@ -49,7 +49,7 @@ public class ArrayList implements List {
       return indexToCheck;
     }
   }
-  
+
   @Override
   public ReturnObject add(int index, Object item) {
     ReturnObjectImpl indexToCheck = checkIndex(index);
@@ -59,7 +59,7 @@ public class ArrayList implements List {
     ReturnObjectImpl objectToCheck = checkObject(item);
     if (!objectToCheck.hasError()) {
       Object[] transfer = new Object[array.length + 1];
-      for (int i = array.length; i >= 0; i-- ) {
+      for (int i = array.length; i >= 0; i--) {
         if (i > index) {
           transfer[i] = array[i - 1];
         } else if (i == index) {
@@ -74,7 +74,7 @@ public class ArrayList implements List {
       return objectToCheck;
     }
   }
-  
+
   @Override
   public ReturnObject add(Object item) {
     ReturnObjectImpl objectToCheck = checkObject(item);
@@ -90,16 +90,16 @@ public class ArrayList implements List {
       return objectToCheck;
     }
   }
-  
-  private ReturnObjectImpl checkIndex (int indexCheck) {
+
+  private ReturnObjectImpl checkIndex(int indexCheck) {
     if (indexCheck < 0 || indexCheck >= array.length) {
       return new ReturnObjectImpl(ErrorMessage.INDEX_OUT_OF_BOUNDS);
     } else {
       return new ReturnObjectImpl(array[indexCheck]);
     }
   }
-  
-  private ReturnObjectImpl checkObject (Object objectCheck) {
+
+  private ReturnObjectImpl checkObject(Object objectCheck) {
     if (objectCheck == null) {
       return new ReturnObjectImpl(ErrorMessage.INVALID_ARGUMENT);
     } else {
